@@ -1,9 +1,9 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+import { FaSort } from "react-icons/fa";
 
 // This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
 export type User = {
   id: number;
   first_name: string;
@@ -21,7 +21,18 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: "first_name",
-    header: "First Name",
+    // header: "First Name",
+    header: ({ column }) => {
+      return (
+        <button
+          className="flex items-center"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          First Name
+          <FaSort />
+        </button>
+      );
+    },
   },
   {
     accessorKey: "last_name",
