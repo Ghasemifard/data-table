@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { FiEdit, FiTrash2 } from "react-icons/fi";
+import { FiEdit, FiTrash2,FiPlus } from "react-icons/fi";
+import { HiMiniMagnifyingGlass } from "react-icons/hi2";
+
+
 
 import {
   ColumnDef,
@@ -44,19 +47,42 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
-    {/*  */}
-    <div className="flex items-center py-4">
-        <input
-          placeholder="Filter first name..."
-          value={(table.getColumn("first_name")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("first_name")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
+      {/* header */}
+      <div className="h-16 flex justify-between items-center p-4">
+        <div className="flex justify-between w-96 h-8">
+          <div className="flex w-36 justify-between items-center">
+            <p className="text-xs">Show</p>
+            <select name="rowNum" id="rowNum" className="w-43 h-31 bg-E0E0E0 px-2 py-2 rounded-lg text-xs">
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="30">30</option>
+              <option value="40">40</option>
+              <option value="50">50</option>
+            </select>
+            <p className="text-xs">entries</p>
+          </div>
+            <div className="flex w-52  items-center border-2 border-slate-400 rounded-lg justify-start gap-1 p-2">
+            <HiMiniMagnifyingGlass style={{  color: '#9E9E9E' }} size={25}/>
+            <input className="text-xs w-40 font-medium focus:border-none outline-none"
+            placeholder="Search..."
+            value={
+              (table.getColumn("first_name")?.getFilterValue() as string) ?? ""
+            }
+            onChange={(event) =>
+              table.getColumn("first_name")?.setFilterValue(event.target.value)
+            }
+          />
+            </div>
+          
+        </div>
+        <div>
+          <button className=" flex w-36 h-8 rounded-lg py-2 px-2 items-center justify-center gap-2 bg-indigo-600  text-white text-xs font-bold ">
+          <FiPlus style={{fontWeight:'bold'}} size={20} /> <span>Add Customer</span>
+          </button>
+        </div>
       </div>
       {/* Table */}
-      <div className="rounded-md border">
+      <div className="">
         <table>
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (

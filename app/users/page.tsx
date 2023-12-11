@@ -12,9 +12,8 @@ export default async function userPage() {
     const data = await getUsers()
 
   return (
-    <section className="p-5">
-      <div className="container">
-        <h1 className="text-3xl font-bold">All Users</h1>
+    <section className="">
+      <div className="">
         <DataTable columns={columns} data={data}/>
       </div>
     </section>
