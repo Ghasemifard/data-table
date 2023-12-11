@@ -61,7 +61,7 @@ export function DataTable<TData, TValue>({
             </select>
             <p className="text-xs">entries</p>
           </div>
-            <div className="flex w-52  items-center border-2 border-slate-400 rounded-lg justify-start gap-1 p-2">
+            <div className="flex w-52  items-center border-2 border-neutral-400 rounded-lg justify-start gap-1 p-2">
             <HiMiniMagnifyingGlass style={{  color: '#9E9E9E' }} size={25}/>
             <input className="text-xs w-40 font-medium focus:border-none outline-none"
             placeholder="Search..."
@@ -82,14 +82,13 @@ export function DataTable<TData, TValue>({
         </div>
       </div>
       {/* Table */}
-      <div className="">
-        <table>
-          <thead>
+        <table className="w-full flex-col">
+          <thead  className=" w-full">
             {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
+              <tr key={headerGroup.id} className="w-full flex-row justify-between items-center h-12 p-4 gap-4">
                 {headerGroup.headers.map((header) => {
                   return (
-                    <th key={header.id}>
+                    <th key={header.id} className="flex-row justify-center">
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -133,8 +132,7 @@ export function DataTable<TData, TValue>({
             )}
           </tbody>
         </table>
-      </div>
-
+     
       {/* Pagination */}
       <div className="flex items-center justify-end space-x-2 py-4">
         <button

@@ -25,11 +25,11 @@ export const columns: ColumnDef<User>[] = [
     header: ({ column }) => {
       return (
         <button
-          className="flex items-center"
+          className="flex items-center gap-2"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          First Name
-          <FaSort />
+         <span>First Name</span> 
+          <FaSort style={{color:'#9E9E9E'}}  />
         </button>
       );
     },
@@ -39,11 +39,11 @@ export const columns: ColumnDef<User>[] = [
     header: ({ column }) => {
         return (
           <button
-            className="flex items-center"
+            className="flex items-center gap-2 justify-center"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Last Name
-            <FaSort />
+            <span>Last Name</span>
+            <FaSort style={{color:'#9E9E9E'}} />
           </button>
         );
       },
@@ -53,11 +53,11 @@ export const columns: ColumnDef<User>[] = [
     header: ({ column }) => {
         return (
           <button
-            className="flex items-center"
+            className="flex items-center gap-2"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Code
-            <FaSort />
+            <span>Code</span>
+            <FaSort style={{color:'#9E9E9E'}} />
           </button>
         );
       },
@@ -71,11 +71,11 @@ export const columns: ColumnDef<User>[] = [
     header: ({ column }) => {
         return (
           <button
-            className="flex items-center"
+            className="flex items-center gap-2"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Status
-            <FaSort />
+            <span>Status</span>
+            <FaSort style={{color:'#9E9E9E'}} />
           </button>
         );
       },
@@ -85,11 +85,11 @@ export const columns: ColumnDef<User>[] = [
     header: ({ column }) => {
         return (
           <button
-            className="flex items-center"
+            className="flex items-center gap-2"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Access
-            <FaSort />
+             <span>Access</span>
+            <FaSort style={{color:'#9E9E9E'}} />
           </button>
         );
       },
