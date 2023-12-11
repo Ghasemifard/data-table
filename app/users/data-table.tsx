@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import {FiEdit, FiTrash2 } from "react-icons/fi";
+
 import {
   ColumnDef,
   flexRender,
@@ -61,12 +63,19 @@ export function DataTable<TData, TValue>({
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <tr key={row.id} data-state={row.getIsSelected() && "selected"}>
-                  {row.getVisibleCells().map((cell) => (
+                  {row.getVisibleCells().map((cell, index) => (
                     <td key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
+                        {index === row.getVisibleCells().length -1 ?(
+                            // If it's the last column, render the trash icon
+                            <div className="flex"><FiEdit /> <FiTrash2 /></div>
+                        ):(
+                            // Render cell content
+                            flexRender(
+                                cell.column.columnDef.cell,
+                                cell.getContext()
+                              )
+                        )}
+                      
                     </td>
                   ))}
                 </tr>

@@ -94,4 +94,8 @@ export const columns: ColumnDef<User>[] = [
         );
       },
   },
+  {
+    accessorKey: "action",
+    header: "Action"
+  },
 ];
