@@ -36,11 +36,31 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: "last_name",
-    header: "Last Name",
+    header: ({ column }) => {
+        return (
+          <button
+            className="flex items-center"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Last Name
+            <FaSort />
+          </button>
+        );
+      },
   },
   {
     accessorKey: "code",
-    header: "Code",
+    header: ({ column }) => {
+        return (
+          <button
+            className="flex items-center"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Code
+            <FaSort />
+          </button>
+        );
+      },
   },
   {
     accessorKey: "company",
@@ -48,10 +68,30 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: ({ column }) => {
+        return (
+          <button
+            className="flex items-center"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Status
+            <FaSort />
+          </button>
+        );
+      },
   },
   {
     accessorKey: "access",
-    header: "Access",
+    header: ({ column }) => {
+        return (
+          <button
+            className="flex items-center"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Access
+            <FaSort />
+          </button>
+        );
+      },
   },
 ];
