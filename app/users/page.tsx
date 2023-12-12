@@ -23,7 +23,7 @@ export default  function UserPage() {
         return <p>Loading...</p>;
       }
     
-      if (isError) {
+      if (isError|| data === undefined) {
         return <p>Error loading data</p>;
       }
 
