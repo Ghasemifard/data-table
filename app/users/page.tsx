@@ -12,8 +12,8 @@ export default async function userPage() {
     const data = await getUsers()
 
   return (
-    <section className="">
-      <div className="">
+    <section className="flex justify-center items-center">
+      <div className="max-w-7xl container items-center bg-white">
         <DataTable columns={columns} data={data}/>
       </div>
     </section>

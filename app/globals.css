@@ -17,5 +17,13 @@
 
 body {
   color: rgb(var(--foreground-rgb));
+  @apply  bg-slate-200;
+  @apply  py-6;
 
+  
+
+}
+
+tr.even{
+  @apply  bg-purple-50;
 }
