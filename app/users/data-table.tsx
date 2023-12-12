@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { FiEdit, FiTrash2, FiPlus } from "react-icons/fi";
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
+import debounce from "lodash/debounce";
 
 import {
   ColumnDef,
@@ -43,6 +44,10 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
   });
 
+  const handleSearchChange = debounce((value: string) => {
+    table.getColumn('first_name')?.setFilterValue(value);
+  }, 100); // Adjust the debounce delay as needed (e.g., 300 milliseconds)
+
   return (
     <>
       {/* header */}
@@ -77,9 +82,10 @@ export function DataTable<TData, TValue>({
                 ""
               }
               onChange={(event) =>
-                table
-                  .getColumn("first_name")
-                  ?.setFilterValue(event.target.value)
+                // table
+                //   .getColumn("first_name")
+                //   ?.setFilterValue(event.target.value)
+                handleSearchChange(event.target.value)
               }
             />
           </div>
