@@ -43,7 +43,6 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
   });
 
-
   return (
     <>
       {/* header */}
@@ -51,17 +50,21 @@ export function DataTable<TData, TValue>({
         <div className="flex justify-between w-96 h-8">
           <div className="flex w-36 justify-between items-center">
             <p className="text-xs">Show</p>
+
             <select
-              name="rowNum"
-              id="rowNum"
-              className="w-43 h-31 bg-E0E0E0 px-2 py-2 rounded-lg text-xs"
-            >
-              <option value="10">10</option>
-              <option value="20">20</option>
-              <option value="30">30</option>
-              <option value="40">40</option>
-              <option value="50">50</option>
-            </select>
+          value={table.getState().pagination.pageSize}
+          onChange={e => {
+            table.setPageSize(Number(e.target.value))
+        }}
+        className="w-43 h-31 bg-E0E0E0 px-2 py-2 rounded-lg text-xs"
+        >
+          {[10, 20, 30, 40, 50,100].map(pageSize => (
+            <option key={pageSize} value={pageSize}>
+             {pageSize}
+            </option>
+          ))}
+        </select>
+
             <p className="text-xs">entries</p>
           </div>
           <div className="flex w-52  items-center border-2 border-neutral-400 rounded-lg justify-start gap-1 p-2">
@@ -167,19 +170,27 @@ export function DataTable<TData, TValue>({
       </table>
 
       {/* Pagination */}
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <button
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </button>
-        <button
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </button>
+      <div className="h-16 w-full flex items-center justify-center ">
+        <div className="container h-8 gap-3 flex items-center justify-center">
+          <button
+          className="text-neutral-400 font-medium text-sm"
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
+            Previous
+          </button>
+          {/* <span onClick={()=>alert("1111111111")} className="p-2 px-4 rounded-lg bg-indigo-600">1</span>
+          <span className="p-2 px-4 rounded-lg bg-neutral-200">2</span>
+          <span className="p-2 px-4 rounded-lg bg-neutral-200">3</span> */}
+          {}
+          <button
+          className="text-neutral-400 font-medium text-sm"
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
+            Next
+          </button>
+        </div>
       </div>
     </>
   );
