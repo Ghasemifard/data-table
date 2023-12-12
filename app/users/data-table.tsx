@@ -183,6 +183,30 @@ export function DataTable<TData, TValue>({
           <span className="p-2 px-4 rounded-lg bg-neutral-200">2</span>
           <span className="p-2 px-4 rounded-lg bg-neutral-200">3</span> */}
           {}
+          {
+            
+          }
+
+    {[...Array(3)].map((_, index) => {
+      const pageNumber = table.getState().pagination.pageIndex +index;
+      return (
+        <button
+          key={index}
+          className={`p-2 px-4 rounded-lg  ${
+            table.getState().pagination.pageIndex === pageNumber ? 'bg-indigo-600 text-white ' : 'bg-neutral-200'
+          }`}
+          onClick={() => table.setPageIndex(pageNumber)}
+          disabled={pageNumber >=100/ table.getState().pagination.pageSize}
+        >
+          {pageNumber + 1}
+        </button>
+      );
+    })}
+
+
+
+
+
           <button
           className="text-neutral-400 font-medium text-sm"
             onClick={() => table.nextPage()}
