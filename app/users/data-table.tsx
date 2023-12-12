@@ -23,7 +23,7 @@ interface DataTableProps<TData, TValue> {
 
 export function DataTable<TData, TValue>({
   columns,
-  data,
+  data=[],// Provide a default value (empty array)
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -179,13 +179,7 @@ export function DataTable<TData, TValue>({
           >
             Previous
           </button>
-          {/* <span onClick={()=>alert("1111111111")} className="p-2 px-4 rounded-lg bg-indigo-600">1</span>
-          <span className="p-2 px-4 rounded-lg bg-neutral-200">2</span>
-          <span className="p-2 px-4 rounded-lg bg-neutral-200">3</span> */}
-          {}
-          {
-            
-          }
+
 
     {[...Array(3)].map((_, index) => {
       const pageNumber = table.getState().pagination.pageIndex +index;

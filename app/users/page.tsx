@@ -1,5 +1,7 @@
+"use client"
 import { User,columns } from "./columns";
 import { DataTable } from "./data-table";
+import {useQuery} from "react-query"
 
 async function getUsers():Promise<User[]> {
     const res = await fetch(
@@ -8,8 +10,16 @@ async function getUsers():Promise<User[]> {
     const data = await res.json()
     return data
 }
-export default async function userPage() {
-    const data = await getUsers()
+export default  function UserPage() {
+    // const data = await getUsers()
+    const { data, isLoading, isError } = useQuery("users", getUsers);
+    if (isLoading) {
+        return <p>Loading...</p>;
+      }
+    
+      if (isError) {
+        return <p>Error loading data</p>;
+      }
 
   return (
     <section className="flex justify-center items-center">
@@ -19,3 +29,4 @@ export default async function userPage() {
     </section>
   );
 }
+
