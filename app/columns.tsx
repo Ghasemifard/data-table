@@ -14,8 +14,12 @@ export type User = {
   access: "1" | "2" | "3";
 };
 
+interface HeaderProps {
+  column: any; // Adjust the type as needed
+  label: string;
+}
 
-const SortableHeader = ( column:any, label:string ) => (
+const SortableHeader: React.FC<HeaderProps> = ({ column, label }) => (
   <button
     className="flex items-center gap-2"
     onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
