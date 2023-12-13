@@ -24,7 +24,7 @@ interface DataTableProps<TData, TValue> {
 
 export function DataTable<TData, TValue>({
   columns,
-  data=[],// Provide a default value (empty array)
+  data = [], // Provide a default value (empty array)
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -44,8 +44,11 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
   });
 
+  // Debounce the search input to reduce unnecessary re-renders and API calls
   const handleSearchChange = debounce((value: string) => {
-    table.getColumn('first_name')?.setFilterValue(value);
+    // Set filter value for the "first_name" column
+
+    table.getColumn("first_name")?.setFilterValue(value);
   }, 100); // Adjust the debounce delay as needed (e.g., 300 milliseconds)
 
   return (
@@ -55,23 +58,24 @@ export function DataTable<TData, TValue>({
         <div className="flex justify-between w-96 h-8">
           <div className="flex w-36 justify-between items-center">
             <p className="text-xs">Show</p>
-
+            {/* Select Page Size */}
             <select
-          value={table.getState().pagination.pageSize}
-          onChange={e => {
-            table.setPageSize(Number(e.target.value))
-        }}
-        className="w-43 h-31 bg-E0E0E0 px-2 py-2 rounded-lg text-xs"
-        >
-          {[10, 20, 30, 40, 50,100].map(pageSize => (
-            <option key={pageSize} value={pageSize}>
-             {pageSize}
-            </option>
-          ))}
-        </select>
+              value={table.getState().pagination.pageSize}
+              onChange={(e) => {
+                table.setPageSize(Number(e.target.value));
+              }}
+              className="w-43 h-31 bg-E0E0E0 px-2 py-2 rounded-lg text-xs"
+            >
+              {[10, 20, 30, 40, 50, 100].map((pageSize) => (
+                <option key={pageSize} value={pageSize}>
+                  {pageSize}
+                </option>
+              ))}
+            </select>
 
             <p className="text-xs">entries</p>
           </div>
+          {/* Search Filter */}
           <div className="flex w-52  items-center border-2 border-neutral-400 rounded-lg justify-start gap-1 p-2">
             <HiMiniMagnifyingGlass style={{ color: "#9E9E9E" }} size={25} />
             <input
@@ -81,16 +85,12 @@ export function DataTable<TData, TValue>({
                 (table.getColumn("first_name")?.getFilterValue() as string) ??
                 ""
               }
-              onChange={(event) =>
-                // table
-                //   .getColumn("first_name")
-                //   ?.setFilterValue(event.target.value)
-                handleSearchChange(event.target.value)
-              }
+              onChange={(event) => handleSearchChange(event.target.value)}
             />
           </div>
         </div>
         <div>
+          {/* Add Customer */}
           <button className=" flex w-36 h-8 rounded-lg py-2 px-2 items-center justify-center gap-2 bg-indigo-600  text-white text-xs font-bold ">
             <FiPlus style={{ fontWeight: "bold" }} size={20} />{" "}
             <span>Add Customer</span>
@@ -100,11 +100,14 @@ export function DataTable<TData, TValue>({
       {/* Table */}
       <table className="w-full flex-col">
         <thead className=" w-full">
+          {/* Render Header Row */}
           {table.getHeaderGroups().map((headerGroup) => (
             <tr
               key={headerGroup.id}
               className="w-full flex-row justify-between items-center h-12 p-4 gap-4"
             >
+              {/* Render Header Cells */}
+
               {headerGroup.headers.map((header) => {
                 return (
                   <th
@@ -125,6 +128,7 @@ export function DataTable<TData, TValue>({
         </thead>
         <tbody>
           {table.getRowModel().rows?.length ? (
+            // Rende Table Rows
             table.getRowModel().rows.map((row) => (
               <tr
                 key={row.id}
@@ -133,16 +137,17 @@ export function DataTable<TData, TValue>({
                   parseInt(row.id) % 2 === 0 ? "even" : ""
                 }`}
               >
+                {/* Render Table Cells */}
                 {row.getVisibleCells().map((cell, index) => (
                   <td key={cell.id} className="text-center font-medium text-sm">
+                    {/*  If it's the last column, render the Trash and Edit icon */}
                     {index === row.getVisibleCells().length - 1 ? (
-                      // If it's the last column, render the trash icon
                       <div className="flex justify-center gap-4  ">
                         <FiEdit style={{ color: "#624DE3" }} size={24} />{" "}
                         <FiTrash2 style={{ color: "#A30D11" }} size={24} />
                       </div>
-                    ) : index === row.getVisibleCells().length - 2 ? (
-                      // If it's the last column, render the trash icon
+                    ) : //  If it's the one before the last column: set color and backgroun based on cell content
+                    index === row.getVisibleCells().length - 2 ? (
                       <span
                         className={`w-20 px-9 py-3 rounded-3xl ${
                           cell.getValue() === 1
@@ -167,6 +172,7 @@ export function DataTable<TData, TValue>({
             ))
           ) : (
             <tr>
+              {/* When we have not any row */}
               <td colSpan={columns.length} className="h-24 text-center">
                 No results.
               </td>
@@ -179,36 +185,36 @@ export function DataTable<TData, TValue>({
       <div className="h-16 w-full flex items-center justify-center ">
         <div className="container h-8 gap-3 flex items-center justify-center">
           <button
-          className="text-neutral-400 font-medium text-sm"
+            aria-label="Go to previous page"
+            className="text-neutral-400 font-medium text-sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
             Previous
           </button>
-
-
-    {[...Array(3)].map((_, index) => {
-      const pageNumber = table.getState().pagination.pageIndex +index;
-      return (
-        <button
-          key={index}
-          className={`p-2 px-4 rounded-lg  ${
-            table.getState().pagination.pageIndex === pageNumber ? 'bg-indigo-600 text-white ' : 'bg-neutral-200'
-          }`}
-          onClick={() => table.setPageIndex(pageNumber)}
-          disabled={pageNumber >=100/ table.getState().pagination.pageSize}
-        >
-          {pageNumber + 1}
-        </button>
-      );
-    })}
-
-
-
-
-
+          {/* three dynamic button between Next and Previous Button */}
+          {[...Array(3)].map((_, index) => {
+            const pageNumber = table.getState().pagination.pageIndex + index;
+            return (
+              <button
+                key={index}
+                className={`p-2 px-4 rounded-lg  ${
+                  table.getState().pagination.pageIndex === pageNumber
+                    ? "bg-indigo-600 text-white "
+                    : "bg-neutral-200"
+                }`}
+                onClick={() => table.setPageIndex(pageNumber)}
+                disabled={
+                  pageNumber >= 100 / table.getState().pagination.pageSize
+                }
+              >
+                {pageNumber + 1}
+              </button>
+            );
+          })}
           <button
-          className="text-neutral-400 font-medium text-sm"
+            aria-label="Go to next page"
+            className="text-neutral-400 font-medium text-sm"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >

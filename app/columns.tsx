@@ -14,6 +14,18 @@ export type User = {
   access: "1" | "2" | "3";
 };
 
+
+const SortableHeader = ( column:any, label:string ) => (
+  <button
+    className="flex items-center gap-2"
+    onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+  >
+    <span>{label}</span>
+    <FaSort style={{ color: '#9E9E9E' }} />
+  </button>
+);
+
+
 export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "id",
@@ -22,45 +34,15 @@ export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "first_name",
     // header: "First Name",
-    header: ({ column }) => {
-      return (
-        <button
-          className="flex items-center gap-2"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-         <span>First Name</span> 
-          <FaSort style={{color:'#9E9E9E'}}  />
-        </button>
-      );
-    },
+    header:({ column }) => <SortableHeader column={column} label="First Name" />,
   },
   {
     accessorKey: "last_name",
-    header: ({ column }) => {
-        return (
-          <button
-            className="flex items-center gap-2 justify-center"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            <span>Last Name</span>
-            <FaSort style={{color:'#9E9E9E'}} />
-          </button>
-        );
-      },
+    header: ({ column }) => <SortableHeader column={column} label="Last Name" />,
   },
   {
     accessorKey: "code",
-    header: ({ column }) => {
-        return (
-          <button
-            className="flex items-center gap-2"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            <span>Code</span>
-            <FaSort style={{color:'#9E9E9E'}} />
-          </button>
-        );
-      },
+    header: ({ column }) => <SortableHeader column={column} label="Code" />,
   },
   {
     accessorKey: "company",
@@ -68,31 +50,11 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: "status",
-    header: ({ column }) => {
-        return (
-          <button
-            className="flex items-center gap-2"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            <span>Status</span>
-            <FaSort style={{color:'#9E9E9E'}} />
-          </button>
-        );
-      },
+    header:({ column }) => <SortableHeader column={column} label="Status" />,
   },
   {
     accessorKey: "access",
-    header: ({ column }) => {
-        return (
-          <button
-            className="flex items-center gap-2"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-             <span>Access</span>
-            <FaSort style={{color:'#9E9E9E'}} />
-          </button>
-        );
-      },
+    header: ({ column }) => <SortableHeader column={column} label="Access" />,
   },
   {
     accessorKey: "action",
