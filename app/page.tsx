@@ -1,6 +1,6 @@
 "use client"
-import { User,columns } from "./columns";
-import { DataTable } from "./data-table";
+import { User,columns } from "./components/columns";
+import { DataTable } from "./components/data-table";
 import {useQuery} from "react-query"
 import { fetchData } from "./utils/fetchData";
 
