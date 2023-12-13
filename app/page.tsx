@@ -2,22 +2,13 @@
 import { User,columns } from "./columns";
 import { DataTable } from "./data-table";
 import {useQuery} from "react-query"
+import { fetchData } from "./utils/fetchData";
 
 async function getUsers():Promise<User[]> {
-    try {
-        const res = await fetch(
-            'https://mocki.io/v1/3361b3fd-79ad-45c2-aba4-3ee66cc9230c'
-        )
-        const data = await res.json()
-        return data; 
-    } catch (error) {
-        
-        throw new Error('Error fetching user data');
-    }
+    return fetchData('https://mocki.io/v1/3361b3fd-79ad-45c2-aba4-3ee66cc9230c');
 
 }
 export default  function HomePage() {
-    // const data = await getUsers()
     const { data, isLoading, isError } = useQuery("users", getUsers);
     if (isLoading) {
         return <p>Loading...</p>;

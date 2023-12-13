@@ -12,7 +12,7 @@ const montserratFont = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Data table App",
+  title: "Data Table App",
   description: "data table that show users informations",
 };
 
