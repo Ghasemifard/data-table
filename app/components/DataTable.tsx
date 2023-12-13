@@ -27,7 +27,7 @@ export function DataTable<TData, TValue>({
   data = [], // Provide a default value (empty array)
 }: DataTableProps<TData, TValue>) {
   // Dark Mode
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const toggleDarkMode = () => {
     setIsDarkMode((prevMode) => !prevMode);
