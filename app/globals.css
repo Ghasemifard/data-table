@@ -27,3 +27,6 @@ body {
 tr.even{
   @apply  bg-purple-50;
 }
+.dark tr.even{
+  @apply  bg-indigo-900;
+}

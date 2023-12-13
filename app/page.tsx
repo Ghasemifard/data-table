@@ -20,9 +20,7 @@ export default  function HomePage() {
 
   return (
     <section className="flex justify-center items-center">
-      <div className="max-w-7xl container items-center bg-white">
         <DataTable columns={columns} data={data}/>
-      </div>
     </section>
   );
 }
