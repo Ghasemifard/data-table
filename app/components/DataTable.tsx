@@ -66,7 +66,7 @@ export function DataTable<TData, TValue>({
         }`}
       >
         {/* header */}
-        <div className="h-16 flex justify-between items-center p-4 ">
+        <div className="h-16 flex justify-between items-center p-4 max-md:flex-wrap ">
           <div className="flex justify-between w-96 h-8">
             <div className="flex w-36 justify-between items-center">
               <p className="text-xs">Show</p>
@@ -106,14 +106,14 @@ export function DataTable<TData, TValue>({
               />
             </div>
           </div>
-          <div className="flex flex-row items-center justify-between gap-4">
-
+          <div className="flex flex-row items-center justify-between gap-4 max-md:my-6">
             <button
               onClick={toggleDarkMode}
               className="w-12 h-6 rounded-full p-1 bg-gray-200 dark:bg-gray-600 relative transition-colors duration-500 ease-in focus:outline-none 
         focus:ring-2focus:ring-blue-700 dark:focus:ring-blue-600 focus:border-transparent"
             >
-              <div className="rounded-full w-4 h-4  bg-blue-600  dark:bg-blue-500 relative ml-0 dark:ml-6 pointer-events-none 
+              <div
+                className="rounded-full w-4 h-4  bg-blue-600  dark:bg-blue-500 relative ml-0 dark:ml-6 pointer-events-none 
               transition-all duration-300 ease-out"
               ></div>
             </button>
@@ -125,7 +125,7 @@ export function DataTable<TData, TValue>({
           </div>
         </div>
         {/* Table */}
-        <table className="w-full flex-col">
+        <table className="w-full flex-col max-md:mt-8">
           <thead className=" w-full">
             {/* Render Header Row */}
             {table.getHeaderGroups().map((headerGroup) => (
@@ -135,11 +135,13 @@ export function DataTable<TData, TValue>({
               >
                 {/* Render Header Cells */}
 
-                {headerGroup.headers.map((header) => {
+                {headerGroup.headers.map((header, index) => {
+                  console.log(header, index);
+
                   return (
                     <th
                       key={header.id}
-                      className=" items-center justify-center p-4  gap-4 mx-auto flex-row font-bold text-sm "
+                      className={`items-center justify-center p-4  gap-4 mx-auto flex-row font-bold text-sm ${ 2 < index && index < 7 ? "max-md:hidden":""} `}
                     >
                       {header.isPlaceholder
                         ? null
@@ -156,7 +158,7 @@ export function DataTable<TData, TValue>({
           <tbody>
             {table.getRowModel().rows?.length ? (
               // Rende Table Rows
-              table.getRowModel().rows.map((row) => (
+              table.getRowModel().rows.map((row , index) => (
                 <tr
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
@@ -168,7 +170,7 @@ export function DataTable<TData, TValue>({
                   {row.getVisibleCells().map((cell, index) => (
                     <td
                       key={cell.id}
-                      className="text-center font-medium text-sm"
+                      className= {`text-center font-medium text-sm ${ 2 < index && index < 7 ? "max-md:hidden":""}`}
                     >
                       {/*  If it's the last column, render the Trash and Edit icon */}
                       {index === row.getVisibleCells().length - 1 ? (
