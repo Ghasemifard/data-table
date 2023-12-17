@@ -62,7 +62,7 @@ export function DataTable<TData, TValue>({
     <>
       <div
         className={`max-w-7xl container items-center ${
-          isDarkMode ? "dark bg-indigo-950 text-white" : "bg-white"
+          isDarkMode ? "dark bg-indigo-950 text-white" : "bg-white text-black"
         }`}
       >
         {/* header */}
